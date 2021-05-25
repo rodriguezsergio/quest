@@ -1,3 +1,25 @@
+# Getting Started
+
+To view the working solution to the [prompt](#A-quest-in-the-clouds) below, run `make everything`.
+
+When you're ready to decommission everything, run `make destroy`.
+
+### Note
+
+The Terraform layout is condensed for the sake of this exercise, but in a production setting individual services would be further subdivided into their own directories and reference each other with data sources or use terraform_remote_state.
+
+## Requirements
+The Makefile assumes you have the AWS CLI, `docker`, `terraform`, `git`, and `make` installed. It is also assumed that you have `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` set in your environment.
+
+`make bootstrap`: provisions a new environment and readies it for deployment
+`make build`: builds the docker image locally
+`make login`: authenticates against AWS so `docker push` functions properly
+`make publish`: builds and pushes the image to ECR
+`make everything`: provisions a new environment, builds the docker images, and publishes it to ECR
+`make destroy`: tear down and delete all AWS assets
+
+---
+
 # A quest in the clouds
 
 ### Q. What is this quest ?

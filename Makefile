@@ -4,6 +4,17 @@ LOCAL_TAG_NAME = rearc/app
 LOCAL_TAG_NAME_FULL = $(LOCAL_TAG_NAME):$(GIT_HASH)
 REMOTE_TAG_NAME = "$(ACCOUNT_NUMBER).dkr.ecr.us-east-1.amazonaws.com/$(LOCAL_TAG_NAME_FULL)"
 
+destroy:
+	cd terraform/ecs && \
+	terraform init && \
+	terraform destroy -var 'repo_name=$(LOCAL_TAG_NAME)' -var 'git_hash=$(GIT_HASH)' -var 'port=3000' -auto-approve && \
+	cd ../vpc && \
+	terraform init && \
+	terraform destroy -var 'port=3000' -auto-approve && \
+	cd ../iam && \
+	terraform init && \
+	terraform destroy -auto-approve
+
 bootstrap:
 	cd terraform/iam && \
 	terraform init && \
