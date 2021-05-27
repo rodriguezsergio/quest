@@ -34,7 +34,7 @@ resource "aws_lb" "lb" {
   security_groups    = [aws_security_group.alb_http.id]
   subnets            = aws_subnet.public.*.id
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Environment = "prod"
